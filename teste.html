@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Atendimento ao Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid');
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding-top: 100px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .container {
+    display: flex;
+    align-items: center; /* Mantém o formulário centralizado verticalmente */
+    height: 100vh; /* Mantém a altura total */
+                    }
+
+        form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    text-align: left;
+    display: inline-block;
+    
+    /* Mantém a altura desejada */
+    height: 80vh;
+
+    /* Ajusta a posição para ficar mais centralizado verticalmente */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    /* Mantém alinhado à esquerda */
+    left: 10%;
+            }
+
+        input[type="text"],
+        textarea {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: black;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            width: calc(100% - 20px);
+            transition: background-color 0.3s;
+            font-size: 14px;
+            font-weight: bolder;
+        }
+        input[type="text"]:focus,
+        textarea:focus {
+            background-color: rgba(255, 255, 255);
+            outline: none;
+        }
+
+        .menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2; /* Garante que o menu esteja acima do conteúdo */
+        }
+
+        .menu button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #333; /* Cor do botão */
+            border: none;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 100px; /* Define largura fixa para o botão */
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 1; /* Garante que o submenu esteja acima do conteúdo */
+            transition: opacity 0.3s;
+            min-width: 120px; /* Define largura mínima para o submenu */
+            transition-delay: 0.1s; /* Adiciona um pequeno atraso para ocultar o submenu */
+        }
+
+        .submenu a {
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+            width: 100%; /* Define largura de 100% para preencher o submenu */
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
+        }
+
+        .submenu a:hover {
+            background-color: #555; /* Cor do item de menu ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+<form id="myForm">
+    <div class="form-group">
+        <label for="protocolo">Protocolo da Ligação</label>
+        <input type="text" id="protocolo" name="protocolo" required>
+    </div>
+
+    <div class="form-group">
+        <label for="nome">NOME DA PESSOA QUE ESTA COM DIFICULDADE OU EM CONTATO 
+</label>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+
+    <div class="form-group">
+        <label for="relato">QUAL O RELATO DO CLIENTE?</label>
+        <textarea id="relato" name="relato" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="feito">O QUE FOI FEITO?</label>
+        <textarea id="feito" name="feito" rows="4" required></textarea>
+    </div>
+     <div class="form-group">
+        <label for="nota">nota da wifi </label>
+        <textarea id="nota" name="nota" rows="1" required></textarea>
+    </div>
+ 
+
+
+    <button type="button" class="copy-button" onclick="copyFormData()">COPIAR</button>
+</form>
+
+<div class="menu">
+    <button onclick="toggleSubMenu('opcoes')">Opções</button>
+    <div class="submenu" id="submenu-opcoes" style="top: 100%; left: 0;">
+        <a href="#" onclick="toggleSubMenu('templates')">Templates</a>
+        <a href="#" onclick="toggleSubMenu('paginas')">Páginas</a>
+    </div>
+    <div class="submenu" id="submenu-templates" style="top: 100%; left: 0; display: none;">
+        <a href="#" onclick="changeBackground('https://images3.alphacoders.com/135/1352229.png')">Solo levening</a>
+        <a href="#" onclick="changeBackground('https://t2.tudocdn.net/694169?w=824&h=494')">GTA</a>
+        <a href="#" onclick="changeBackground('https://wallpapers.com/images/hd/saitama-pictures-0lzzlv3ao0gu5t7u.jpg')">SAITAMA</a>
+        <a href="#" onclick="changeBackground('https://wallpapers.com/images/hd/domain-expansion-gojo-pfp-asx29dfhr3xlj4hx.jpg')">GOJO</a>
+        <a href="#" onclick="changeBackground('https://wallpapers.com/images/hd/madara-uchiha-activating-his-powers-yjjyb8a5qbg2cyie.jpg')">Obito</a>
+        <a href="#" onclick="changeBackground('https://hotmart.s3.amazonaws.com/product_pictures/c8ed27f1-6aba-4d80-a35c-e0f5f02fd17a/gokusupersaiyandeuspapeldeparede1366x768_46.jpg')">Goku</a>
+        <a href="#" onclick="changeBackground('https://i.pinimg.com/736x/9b/6f/c0/9b6fc0871b16da8cf07b042cd7f1428a.jpg')">Senku</a>
+
+
+    </div>
+    <div class="submenu" id="submenu-paginas" style="top: 100%; left: 0; display: none;">
+        <!-- Insira aqui as opções de páginas -->
+        <a href="#">Página 1</a>
+        <a href="#">Página 2</a>
+        <a href="#">Página 3</a>
+    </div>
+</div>
+
+<script>
+   function copyFormData() {
+    var form = document.getElementById("myForm");
+    var formData = "";
+
+    var inputFields = form.querySelectorAll('input[type="text"], textarea');
+
+    inputFields.forEach(function(field, index) {
+        formData += field.previousElementSibling.textContent.trim() + ":\n" + field.value;
+        if (index < inputFields.length - 1) {
+            formData += "\n\n";
+        }
+    });
+
+    navigator.clipboard.writeText(formData).then(function() {
+        alert("COPIADO!");
+    }, function() {
+        alert("Não foi possível copiar os dados do formulário.");
+    });
+}
+
+function toggleSubMenu(menu) {
+    var submenu = document.getElementById("submenu-" + menu);
+    if (submenu.style.display === "block") {
+        submenu.style.display = "none";
+    } else {
+        submenu.style.display = "block";
+    }
+}
+
+function changeBackground(image) {
+    document.body.style.backgroundImage = "url('" + image + "')";
+    document.getElementById("submenu-templates").style.display = "none";
+    document.getElementById("submenu-paginas").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
