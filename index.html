@@ -113,7 +113,7 @@
 <body>
 <form id="myForm">
     <div class="form-group">
-        <label for="protocolo">Protocolo da Ligação</label>
+        <label for="protocolo">PROTOCOLO DA LIGAÇÃO</label>
         <input type="text" id="protocolo" name="protocolo" required>
     </div>
 
@@ -133,7 +133,7 @@
         <textarea id="feito" name="feito" rows="4" required></textarea>
     </div>
      <div class="form-group">
-        <label for="nota">nota da wifi </label>
+        <label for="nota">NOTA DA WIFI</label>
         <textarea id="nota" name="nota" rows="1" required></textarea>
     </div>
  
@@ -164,6 +164,7 @@
         <a href="#">Página 1</a>
         <a href="#">Página 2</a>
         <a href="#">Página 3</a>
+        <a href="#" onclick="goBackToMainMenu('paginas')">Voltar</a>
     </div>
 </div>
 
@@ -196,7 +197,11 @@ function toggleSubMenu(menu) {
         submenu.style.display = "block";
     }
 }
-
+    
+function goBackToMainMenu(menu) {
+    document.getElementById("submenu-" + menu).style.display = "none";
+    document.getElementById("submenu-opcoes").style.display = "block";
+}
 function changeBackground(image) {
     document.body.style.backgroundImage = "url('" + image + "')";
     document.getElementById("submenu-templates").style.display = "none";
