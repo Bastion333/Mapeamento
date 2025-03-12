@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Atendimento ao Cliente</title>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
             background-image: url('https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid');
             color: white;
@@ -20,15 +20,9 @@
             height: 80vh;
         }
 
-        .container {
-    display: flex;
-    align-items: center; /* Mantém o formulário centralizado verticalmente */
-    height: 100vh; /* Mantém a altura total */
-                    }
-
-        form {
+         form {
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
+    padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     text-align: left;
@@ -46,7 +40,7 @@
     left: 10%;
             }
 
-        input[type="text"],
+      input[type="text"],
         textarea {
             background-color: rgba(255, 255, 255, 0.2);
             color: black;
@@ -64,23 +58,21 @@
             background-color: rgba(255, 255, 255);
             outline: none;
         }
-
         .menu {
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 2; /* Garante que o menu esteja acima do conteúdo */
+            z-index: 100;
         }
 
         .menu button {
-            padding: 10px 20px;
+            padding: 10px 15px;
             cursor: pointer;
-            background-color: #333; /* Cor do botão */
+            background-color: #333;
             border: none;
             color: white;
             border-radius: 5px;
             transition: background-color 0.3s;
-            width: 100px; /* Define largura fixa para o botão */
         }
 
         .submenu {
@@ -89,10 +81,9 @@
             background-color: #333;
             border-radius: 5px;
             padding: 10px;
-            z-index: 1; /* Garante que o submenu esteja acima do conteúdo */
-            transition: opacity 0.3s;
-            min-width: 120px; /* Define largura mínima para o submenu */
-            transition-delay: 0.1s; /* Adiciona um pequeno atraso para ocultar o submenu */
+            min-width: 150px;
+            top: 100%;
+            right: 0;
         }
 
         .submenu a {
@@ -101,113 +92,121 @@
             text-decoration: none;
             display: block;
             transition: background-color 0.3s;
-            width: 100%; /* Define largura de 100% para preencher o submenu */
-            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
         }
 
         .submenu a:hover {
-            background-color: #555; /* Cor do item de menu ao passar o mouse */
+            background-color: #555;
         }
+
+        .container {
+    display: flex;
+    align-items: center; /* Mantém o formulário centralizado verticalmente */
+    height: 100vh; /* Mantém a altura total */
+                    }
     </style>
 </head>
 <body>
 <form id="myForm">
     <div class="form-group">
-        <label for="protocolo">PROTOCOLO DA LIGAÇÃO</label>
+        <label for="protocolo">Protocolo da Ligação</label>
         <input type="text" id="protocolo" name="protocolo" required>
     </div>
-
     <div class="form-group">
-        <label for="nome">NOME DA PESSOA QUE ESTA COM DIFICULDADE OU EM CONTATO 
-</label>
+        <label for="nome">Nome da Pessoa</label>
         <input type="text" id="nome" name="nome" required>
     </div>
-
     <div class="form-group">
-        <label for="relato">QUAL O RELATO DO CLIENTE?</label>
+        <label for="relato">Relato do Cliente</label>
         <textarea id="relato" name="relato" rows="4" required></textarea>
     </div>
-
     <div class="form-group">
-        <label for="feito">O QUE FOI FEITO?</label>
+        <label for="feito">O que foi Feito?</label>
         <textarea id="feito" name="feito" rows="4" required></textarea>
     </div>
-     <div class="form-group">
-        <label for="nota">NOTA DA WIFI</label>
-        <textarea id="nota" name="nota" rows="1" required></textarea>
+    <div class="form-group">
+        <label for="nota">Nota da WiFi</label>
+        <input type="text" id="nota" name="nota" required>
     </div>
- 
-
-
-    <button type="button" class="copy-button" onclick="copyFormData()">COPIAR</button>
+    <button type="button" onclick="copyFormData()">Copiar</button>
+    <button type="button" onclick="clearFormData()" style="float: right; background-color: red;">Limpar</button>
 </form>
 
 <div class="menu">
     <button onclick="toggleSubMenu('opcoes')">Opções</button>
-    <div class="submenu" id="submenu-opcoes" style="top: 100%; left: 0;">
+    <div class="submenu" id="submenu-opcoes">
         <a href="#" onclick="toggleSubMenu('templates')">Templates</a>
         <a href="#" onclick="toggleSubMenu('paginas')">Páginas</a>
     </div>
-    <div class="submenu" id="submenu-templates" style="top: 100%; left: 0; display: none;">
-        <a href="#" onclick="changeBackground('https://images3.alphacoders.com/135/1352229.png')">Solo levening</a>
+    <div class="submenu" id="submenu-templates">
+        <a href="#" onclick="changeBackground('https://images3.alphacoders.com/135/1352229.png')">Solo Leveling</a>
         <a href="#" onclick="changeBackground('https://t2.tudocdn.net/694169?w=824&h=494')">GTA</a>
-        <a href="#" onclick="changeBackground('https://wallpapers.com/images/hd/saitama-pictures-0lzzlv3ao0gu5t7u.jpg')">SAITAMA</a>
+        <a href="#" onclick="changeBackground('https://mrwallpaper.com/images/hd/saitama-wall-punch-jsrhnb9daouc4zj3-2.jpg')">Saitama</a>
         <a href="#" onclick="changeBackground('https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//20456906/93b6aa8f-1db1-4545-921d-cfacbb7f5507.png&w=600&h=600&f=webp')">GOJO</a>
         <a href="#" onclick="changeBackground('https://wallpapers.com/images/hd/madara-uchiha-activating-his-powers-yjjyb8a5qbg2cyie.jpg')">Obito</a>
         <a href="#" onclick="changeBackground('https://hotmart.s3.amazonaws.com/product_pictures/c8ed27f1-6aba-4d80-a35c-e0f5f02fd17a/gokusupersaiyandeuspapeldeparede1366x768_46.jpg')">Goku</a>
         <a href="#" onclick="changeBackground('https://i.pinimg.com/736x/9b/6f/c0/9b6fc0871b16da8cf07b042cd7f1428a.jpg')">Senku</a>
         <a href="#" onclick="changeBackground('https://wallpapers-clan.com/wp-content/uploads/2024/08/anya-forger-cute-anime-desktop-wallpaper-preview.jpg')">Anya</a>
         <a href="#" onclick="changeBackground('https://www.fatosdesconhecidos.com.br/wp-content/uploads/2020/12/mulher-gato-batman.png')">CatWoman</a>
-
     </div>
-    <div class="submenu" id="submenu-paginas" style="top: 100%; left: 0; display: none;">
-        <!-- Insira aqui as opções de páginas -->
+    <div class="submenu" id="submenu-paginas">
         <a href="#">Visita Técnica</a>
-        <a href="#" onclick="goBackToMainMenu('paginas')">Voltar</a>
+        <a href="#" onclick="toggleSubMenu('opcoes')">Voltar</a>
     </div>
 </div>
 
 <script>
-   function copyFormData() {
-    var form = document.getElementById("myForm");
-    var formData = "";
-
-    var inputFields = form.querySelectorAll('input[type="text"], textarea');
-
-    inputFields.forEach(function(field, index) {
-        formData += field.previousElementSibling.textContent.trim() + ":\n" + field.value;
-        if (index < inputFields.length - 1) {
-            formData += "\n\n";
-        }
+function copyFormData() {
+    let formData = "";
+    document.querySelectorAll("#myForm .form-group").forEach(group => {
+        let label = group.querySelector("label").textContent.trim();
+        let input = group.querySelector("input, textarea");
+        formData += `${label}: ${input.value}\n\n`;
     });
-
-    navigator.clipboard.writeText(formData).then(function() {
-        alert("COPIADO!");
-    }, function() {
-        alert("Não foi possível copiar os dados do formulário.");
-    });
+    navigator.clipboard.writeText(formData)
+        .then(() => alert("Copiado com sucesso!"))
+        .catch(() => alert("Erro ao copiar."));
 }
 
 function toggleSubMenu(menu) {
-    var submenu = document.getElementById("submenu-" + menu);
-    if (submenu.style.display === "block") {
-        submenu.style.display = "none";
-    } else {
-        submenu.style.display = "block";
+    document.querySelectorAll(".submenu").forEach(sub => {
+        if (sub.id === "submenu-" + menu) {
+            sub.style.display = sub.style.display === "block" ? "none" : "block";
+        } else {
+            sub.style.display = "none";
+        }
+    });
+}
+
+function changeBackground(image) {
+    document.body.style.backgroundImage = `url('${image}')`;
+    sessionStorage.setItem("backgroundImage", image);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const fields = ["protocolo", "nome", "relato", "feito", "nota"];
+    fields.forEach(field => {
+        let input = document.getElementById(field);
+        if (sessionStorage.getItem(field)) {
+            input.value = sessionStorage.getItem(field);
+        }
+        input.addEventListener("input", () => {
+            sessionStorage.setItem(field, input.value);
+        });
+    });
+
+    let savedBackground = sessionStorage.getItem("backgroundImage");
+    if (savedBackground) document.body.style.backgroundImage = `url('${savedBackground}')`;
+});
+
+function clearFormData() {
+    if (confirm("Tem certeza que deseja limpar os campos do formulário? Esta ação não pode ser desfeita.")) {
+        document.querySelectorAll("#myForm input, #myForm textarea").forEach(input => {
+            input.value = "";
+            sessionStorage.removeItem(input.id);
+        });
+        alert("Os campos foram limpos com sucesso!");
     }
 }
-    
-function goBackToMainMenu(menu) {
-    document.getElementById("submenu-" + menu).style.display = "none";
-    document.getElementById("submenu-opcoes").style.display = "block";
-}
-function changeBackground(image) {
-    document.body.style.backgroundImage = "url('" + image + "')";
-    document.getElementById("submenu-templates").style.display = "none";
-    document.getElementById("submenu-paginas").style.display = "none";
-}
-
 </script>
-
 </body>
 </html>
