@@ -26,19 +26,22 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     text-align: left;
-    display: inline-block;
     
-    /* Mantém a altura desejada */
-    height: 80vh;
+    /* Ajusta a largura */
+    width: 50%; /* Aumenta a largura */
+    max-width: 600px; /* Garante que não fique exagerado em telas grandes */
 
-    /* Ajusta a posição para ficar mais centralizado verticalmente */
+    /* Ajusta a altura */
+    min-height: 60vh; /* Faz o formulário ocupar mais espaço verticalmente */
+
+    /* Centraliza na tela */
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    
-    /* Mantém alinhado à esquerda */
-    left: 10%;
-            }
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    left: 30%;
+}
 
       input[type="text"],
         textarea {
@@ -147,6 +150,7 @@
         <a href="#" onclick="changeBackground('https://i.pinimg.com/736x/9b/6f/c0/9b6fc0871b16da8cf07b042cd7f1428a.jpg')">Senku</a>
         <a href="#" onclick="changeBackground('https://wallpapers-clan.com/wp-content/uploads/2024/08/anya-forger-cute-anime-desktop-wallpaper-preview.jpg')">Anya</a>
         <a href="#" onclick="changeBackground('https://www.fatosdesconhecidos.com.br/wp-content/uploads/2020/12/mulher-gato-batman.png')">CatWoman</a>
+        <button type="button" onclick="resetBackground()">Restaurar Fundo</button>
     </div>
     <div class="submenu" id="submenu-paginas">
         <a href="#">Visita Técnica</a>
@@ -206,6 +210,14 @@ function clearFormData() {
         });
         alert("Os campos foram limpos com sucesso!");
     }
+}
+
+
+const defaultBackground = 'https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid';
+
+function resetBackground() {
+    document.body.style.backgroundImage = `url('${defaultBackground}')`;
+    sessionStorage.setItem("backgroundImage", defaultBackground);
 }
 </script>
 </body>
