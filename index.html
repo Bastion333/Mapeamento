@@ -139,12 +139,13 @@
     <div class="submenu" id="submenu-opcoes">
         <a href="#" onclick="toggleSubMenu('personalize')">Personalize seu Template</a>
         <a href="#" onclick="toggleSubMenu('paginas')">Páginas</a>
+        <a href="#" onclick="resetBackground()">Resetar Background</a>
     </div>
 
     <!-- Submenu Personalize seu Template -->
     <div class="submenu" id="submenu-personalize">
         <a href="#">Altere o seu template</a>
-			<input type="text" id="backgroundUrl" placeholder="Cole a URL da imagem" 
+            <input type="text" id="backgroundUrl" placeholder="Cole a URL da imagem" 
             style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: none;">
             <button onclick="applyCustomBackground()" style="
             width: 100%;
@@ -156,7 +157,7 @@
             border-radius: 5px;
             cursor: pointer;
         "> aplicar fundo 
-    		</button>
+            </button>
             <a href="#" onclick="toggleSubMenu('opcoes')">Voltar ao Menu</a>
     </div>
 
