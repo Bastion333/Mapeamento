@@ -182,30 +182,41 @@
     <button type="button" onclick="clearFormData()" style="float: right; background-color: red;">Limpar</button>
 </form>
 
-<div class="menu">
+   <div class="menu">
     <button onclick="toggleSubMenu('opcoes')">Opções</button>
     <div class="submenu" id="submenu-opcoes">
-        <a href="#" onclick="toggleSubMenu('templates')">Templates</a>
+        <a href="#" onclick="toggleSubMenu('personalize')">Personalize seu Template</a>
         <a href="#" onclick="toggleSubMenu('paginas')">Páginas</a>
     </div>
-    <div class="submenu" id="submenu-templates">
-        <a href="#" onclick="changeBackground('https://images3.alphacoders.com/135/1352229.png')">Solo Leveling</a>
-        <a href="#" onclick="changeBackground('https://t2.tudocdn.net/694169?w=824&h=494')">GTA</a>
-        <a href="#" onclick="changeBackground('https://mrwallpaper.com/images/hd/saitama-wall-punch-jsrhnb9daouc4zj3-2.jpg')">Saitama</a>
-        <a href="#" onclick="changeBackground('https://pt.quizur.com/_image?href=https://dev-beta.quizur.com/storage/v1/object/public//imagens//20456906/93b6aa8f-1db1-4545-921d-cfacbb7f5507.png&w=600&h=600&f=webp')">GOJO</a>
-        <a href="#" onclick="changeBackground('https://wallpapers.com/images/hd/madara-uchiha-activating-his-powers-yjjyb8a5qbg2cyie.jpg')">Obito</a>
-        <a href="#" onclick="changeBackground('https://hotmart.s3.amazonaws.com/product_pictures/c8ed27f1-6aba-4d80-a35c-e0f5f02fd17a/gokusupersaiyandeuspapeldeparede1366x768_46.jpg')">Goku</a>
-        <a href="#" onclick="changeBackground('https://i.pinimg.com/736x/9b/6f/c0/9b6fc0871b16da8cf07b042cd7f1428a.jpg')">Senku</a>
-        <a href="#" onclick="changeBackground('https://wallpapers-clan.com/wp-content/uploads/2024/08/anya-forger-cute-anime-desktop-wallpaper-preview.jpg')">Anya</a>
-        <a href="#" onclick="changeBackground('https://www.fatosdesconhecidos.com.br/wp-content/uploads/2020/12/mulher-gato-batman.png')">CatWoman</a>
-        <a href="#" onclick="changeBackground('https://rare-gallery.com/mocahbig/396454-wallpaper-justice-league-darkseid-zack-snyder-4k.jpg')">Darkseid</a>
-        <button type="button" onclick="resetBackground()">Restaurar Fundo</button>
+
+    <!-- Submenu Personalize seu Template -->
+    <div class="submenu" id="submenu-personalize">
+        <a href="#">Altere o seu template</a>
+            <input type="text" id="backgroundUrl" placeholder="Cole a URL da imagem" 
+            style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: none;">
+            <button onclick="applyCustomBackground()" style="
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: green;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        "> aplicar fundo 
+            </button>
+            <a href="#" onclick="toggleSubMenu('opcoes')">Voltar ao Menu</a>
     </div>
+
+    <!-- Submenu Páginas -->
     <div class="submenu" id="submenu-paginas">
-        <a href="index.html">Mapeamento</a>
-        <a href="#" onclick="toggleSubMenu('opcoes')">Voltar</a>
+        <a href="#" onclick="toggleSubMenu('opcoes')">Voltar ao Menu</a>
+        <a href="index.html" onclick="redirectToPage()">Mapeamento</a>
+
     </div>
 </div>
+
+
 
 <script>
 function toggleSubMenu(menu) {
@@ -254,6 +265,17 @@ function resetBackground() {
     sessionStorage.setItem("backgroundImage", defaultBackground);
 }
 
+    function applyCustomBackground() {
+    let imageUrl = document.getElementById("backgroundUrl").value.trim();
+    if (imageUrl) {
+        document.body.style.backgroundImage = `url('${imageUrl}')`;
+        sessionStorage.setItem("backgroundImage", imageUrl);
+        document.getElementById("modal").style.display = "none";
+    } else {
+        alert("Por favor, insira uma URL válida.");
+    }
+}
+
 function checkFormValidity() {
     const form = document.getElementById('myForm');
     const submitButton = document.querySelector("button[type='button']");
@@ -265,7 +287,7 @@ function checkFormValidity() {
     submitButton.disabled = !allFilled;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
     // Recupera o fundo de tela armazenado no sessionStorage
     const backgroundImage = sessionStorage.getItem("backgroundImage") || 'https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid';
     document.body.style.backgroundImage = `url('${backgroundImage}')`;
@@ -291,7 +313,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Inicializa a verificação da validade quando a página carregar
     checkFormValidity();
 });
-
 </script>
 </body>
 </html>
