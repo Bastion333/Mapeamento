@@ -187,6 +187,7 @@
     <div class="submenu" id="submenu-opcoes">
         <a href="#" onclick="toggleSubMenu('personalize')">Personalize seu Template</a>
         <a href="#" onclick="toggleSubMenu('paginas')">Páginas</a>
+        <a href="#" onclick="resetBackground()">Resetar Background</a>
     </div>
 
     <!-- Submenu Personalize seu Template -->
@@ -211,7 +212,7 @@
     <!-- Submenu Páginas -->
     <div class="submenu" id="submenu-paginas">
         <a href="#" onclick="toggleSubMenu('opcoes')">Voltar ao Menu</a>
-        <a href="index.html" onclick="redirectToPage()">Mapeamento</a>
+        <a href="#" onclick="redirectToPage()">Mapeamento</a>
 
     </div>
 </div>
@@ -259,8 +260,9 @@ function changeBackground(image) {
     sessionStorage.setItem("backgroundImage", image);
 }
 
+const defaultBackground = 'https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid';
+
 function resetBackground() {
-    const defaultBackground = 'https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid';
     document.body.style.backgroundImage = `url('${defaultBackground}')`;
     sessionStorage.setItem("backgroundImage", defaultBackground);
 }
