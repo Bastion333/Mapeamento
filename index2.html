@@ -117,6 +117,14 @@
         <label for="nota">TESTES FEITOS</label>
         <textarea id="teste" name="teste" rows="4" required></textarea>
     </div>
+
+    <!-- NOVO CAMPO ADICIONADO: NOTA DO WIFI -->
+    <div class="form-group">
+        <label for="notaWifi">NOTA DO WIFI (0 a 10)</label>
+        <input type="text" id="notaWifi" name="notaWifi" required>
+    </div>
+    <!-- FIM DO NOVO CAMPO -->
+
     <div class="form-group">
         <label for="Sugestões">SUGESTÃO DO CENTRO DE SOLUÇÕES</label>
         <textarea id="Sugestões" name="Sugestões" rows="4" required></textarea>
@@ -294,7 +302,7 @@ function checkFormValidity() {
     const backgroundImage = sessionStorage.getItem("backgroundImage") || 'https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid';
     document.body.style.backgroundImage = `url('${backgroundImage}')`;
 
-    const fields = ["protocolo", "nome", "relato", "feito", "teste", "Sugestões", "caso", "ciente", "REFERENCIA", "cor", "fachada", "agendamento"];
+    const fields = ["protocolo", "nome", "relato", "feito", "teste", "notaWifi", "Sugestões", "caso", "ciente", "REFERENCIA", "cor", "fachada", "agendamento"];
     
     // Preenche os campos com os valores armazenados no sessionStorage
     fields.forEach(field => {
@@ -315,9 +323,6 @@ function checkFormValidity() {
     // Inicializa a verificação da validade quando a página carregar
     checkFormValidity();
 });
-
-
-
 </script>
 </body>
 </html>
