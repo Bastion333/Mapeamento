@@ -4,43 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Atendimento ao Cliente</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        button:disabled {
+            background: #808080;
+            cursor: not-allowed;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 15px;
+            background: #0366d6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
+
     <h2>Formulário de Atendimento ao Cliente</h2>
 
-    <!-- Formulário -->
     <form id="atendimentoForm">
+
         <label>Nome do Cliente:</label>
-        <input type="text" id="nome" placeholder="Digite o nome do cliente"><br><br>
+        <input type="text" id="nome" placeholder="Digite o nome do cliente">
 
         <label>Protocolo:</label>
-        <input type="text" id="protocolo" placeholder="Digite o protocolo"><br><br>
+        <input type="text" id="protocolo" placeholder="Digite o protocolo">
 
         <label>Motivo do Contato:</label>
-        <input type="text" id="motivo" placeholder="Digite o motivo do contato"><br><br>
+        <input type="text" id="motivo" placeholder="Digite o motivo do contato">
 
-        <label>Descrição do Atendimento:</label><br>
-        <textarea id="descricao" rows="3" placeholder="Descreva o atendimento"></textarea><br><br>
+        <label>Descrição do Atendimento:</label>
+        <textarea id="descricao" rows="3" placeholder="Descreva o atendimento"></textarea>
 
-        <label>Cliente está ciente de possíveis cobranças?</label><br>
-        <input type="radio" name="emenda" value="Sim"> Sim
-        <input type="radio" name="emenda" value="Não"> Não<br><br>
+        <label>Cliente está ciente de possíveis cobranças?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="emenda" value="Sim"> Sim</label>
+            <label><input type="radio" name="emenda" value="Não"> Não</label>
+        </div>
 
-        <label>Endereço confirmado?</label><br>
-        <input type="radio" name="endereco" value="Sim"> Sim
-        <input type="radio" name="endereco" value="Não"> Não<br><br>
+        <label>Endereço confirmado?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="endereco" value="Sim"> Sim</label>
+            <label><input type="radio" name="endereco" value="Não"> Não</label>
+        </div>
 
         <button type="button" id="copiarBtn" onclick="copyFormData()" disabled>Copiar Dados</button>
     </form>
+
 
 <script>
     const fields = ["nome", "protocolo", "motivo", "descricao"];
     const radioGroups = ["emenda", "endereco"];
 
-    // Salvar Digitação no Storage e Restaurar
+    // Salvar campos no SessionStorage
     fields.forEach(field => {
         const input = document.getElementById(field);
-
         input.addEventListener("input", () => {
             sessionStorage.setItem(field, input.value);
             checkFormValidity();
@@ -51,9 +98,11 @@
         }
     });
 
-    // Radios salvar no Storage e restaurar
+    // Salvar radios no SessionStorage
     radioGroups.forEach(group => {
-        document.querySelectorAll(`input[name='${group}']`).forEach(radio => {
+        const radios = document.querySelectorAll(`input[name=${group}]`);
+
+        radios.forEach(radio => {
             radio.addEventListener("change", () => {
                 sessionStorage.setItem(group, radio.value);
                 checkFormValidity();
@@ -65,7 +114,7 @@
         });
     });
 
-    // Verificar se tudo está preenchido
+    // Habilitar/desabilitar botão
     function checkFormValidity() {
         const allFilled = fields.every(field => document.getElementById(field).value.trim() !== "");
         const radiosChecked = radioGroups.every(group => sessionStorage.getItem(group) !== null);
@@ -80,17 +129,17 @@
             return;
         }
 
-        const data = `
-Nome: ${document.getElementById("nome").value}
+        const text = `
+Nome do Cliente: ${document.getElementById("nome").value}
 Protocolo: ${document.getElementById("protocolo").value}
-Motivo: ${document.getElementById("motivo").value}
-Descrição: ${document.getElementById("descricao").value}
+Motivo do Contato: ${document.getElementById("motivo").value}
+Descrição do Atendimento: ${document.getElementById("descricao").value}
 Cliente ciente de possíveis cobranças: ${sessionStorage.getItem("emenda")}
 Endereço confirmado: ${sessionStorage.getItem("endereco")}
-        `;
+        `.trim();
 
-        navigator.clipboard.writeText(data.trim());
-        alert("Dados copiados com sucesso ✅");
+        navigator.clipboard.writeText(text);
+        alert("✅ Dados copiados com sucesso!");
     }
 
     checkFormValidity();
