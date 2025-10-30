@@ -1,149 +1,327 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Atendimento ao Cliente</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário de Atendimento ao Cliente</title>
+<style>
+   body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid');
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding-top: 50px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        height: auto;
+        overflow-y: auto;
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
+    form {
+        max-width: 600px;
+        width: 90%;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        text-align: left;
+        overflow-y: auto;
+    }
 
-        input, textarea, button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
+    input[type="text"],
+    textarea {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: black;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s;
+        font-size: 14px;
+        font-weight: bolder;
+    }
 
-        label {
-            font-weight: bold;
-        }
+    input[type="text"]:focus,
+    textarea:focus {
+        background-color: rgba(255, 255, 255);
+        outline: none;
+    }
 
-        button:disabled {
-            background: #808080;
-            cursor: not-allowed;
-        }
+    .menu {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+    }
 
-        button {
-            margin-top: 15px;
-            padding: 10px;
-            font-size: 15px;
-            background: #0366d6;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+    .menu button {
+        padding: 10px 15px;
+        cursor: pointer;
+        background-color: #333;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
 
-        .radio-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-    </style>
+    .submenu {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        border-radius: 5px;
+        padding: 10px;
+        min-width: 150px;
+        top: 100%;
+        right: 0;
+    }
+
+    .submenu a {
+        color: white;
+        padding: 8px 12px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s;
+    }
+
+    .submenu a:hover {
+        background-color: #555;
+    }
+</style>
 </head>
 <body>
+<form id="myForm">
+    <div class="form-group">
+        <label for="protocolo">PROTOCOLO DA LIGAÇÃO</label>
+        <input type="text" id="protocolo" name="protocolo" required>
+    </div>
+    <div class="form-group">
+        <label for="nome">TEC:</label>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+    <div class="form-group">
+        <label for="relato">CLIENTE:</label>
+        <textarea id="relato" name="relato" rows="1" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="feito">PROBLEMA</label>
+        <textarea id="feito" name="feito" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="nota">TESTES FEITOS</label>
+        <textarea id="teste" name="teste" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="notaWifi">NOTA DO WIFI </label>
+        <input type="text" id="notaWifi" name="notaWifi" required>
+    </div>
+    <div class="form-group">
+        <label for="Sugestões">SUGESTÃO DO CENTRO DE SOLUÇÕES</label>
+        <textarea id="Sugestões" name="Sugestões" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label>Foi feita emenda no drop do cliente?</label>
+        <div>
+            <label style="display: block;">
+                <input type="radio" name="emenda" value="Sim"> Sim
+            </label>
+            <label style="display: block;">
+                <input type="radio" name="emenda" value="Não"> Não
+            </label>
+            <label style="display: block;">
+                <input type="radio" name="emenda" value="Sem relação"> Sem relação com o problema
+            </label>
+        </div>    
+    </div>
 
-    <h2>Formulário de Atendimento ao Cliente</h2>
+    <div class="form-group">
+        <label for="caso">OUTROS PROBLEMAS RELATADOS</label>
+        <input type="text" id="caso" name="caso" required>
+    </div>
 
-    <form id="atendimentoForm">
+    <div class="form-group">
+        <label for="ciente">CLIENTE ESTA CIENTES DE POSSIVEIS COBRAÇAS</label>
+        <input type="text" id="ciente" name="ciente" required>
+    </div>
 
-        <label>Nome do Cliente:</label>
-        <input type="text" id="nome" placeholder="Digite o nome do cliente">
+    <div class="form-group">
+        <label>CONFIRMADO ENDEREÇO</label>
+        <div>
+            <label style="display: block;">
+                <input type="radio" name="endereco" value="Sim"> Sim
+            </label>
+            <label style="display: block;">
+                <input type="radio" name="endereco" value="Não"> Não
+            </label>
+        </div> 
+    </div>
 
-        <label>Protocolo:</label>
-        <input type="text" id="protocolo" placeholder="Digite o protocolo">
+    <div class="form-group">
+        <label for="REFERENCIA">PONTO DE REFERENCIA</label>
+        <textarea id="REFERENCIA" name="REFERENCIA" rows="1" required></textarea>
+    </div>
 
-        <label>Motivo do Contato:</label>
-        <input type="text" id="motivo" placeholder="Digite o motivo do contato">
+    <div class="form-group">
+        <label for="cor">COR/MATERIAL DA CASA:</label>
+        <textarea id="cor" name="cor" rows="1" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="fachada">FACHADA DA CASA:</label>
+        <textarea id="fachada" name="fachada" rows="2" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="agendamento">INFORMAÇÕES AO AGENDAMENTO</label>
+        <textarea id="agendamento" name="agendamento" rows="2" required></textarea>
+    </div>
 
-        <label>Descrição do Atendimento:</label>
-        <textarea id="descricao" rows="3" placeholder="Descreva o atendimento"></textarea>
+    <button type="button" onclick="copyFormData()">Copiar</button>
+    <button type="button" onclick="clearFormData()" style="float: right; background-color: red;">Limpar</button>
+</form>
 
-        <label>Cliente está ciente de possíveis cobranças?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="emenda" value="Sim"> Sim</label>
-            <label><input type="radio" name="emenda" value="Não"> Não</label>
-        </div>
+<div class="menu">
+    <button onclick="toggleSubMenu('opcoes')">Opções</button>
+    <div class="submenu" id="submenu-opcoes">
+        <a href="#" onclick="toggleSubMenu('personalize')">Personalize seu Template</a>
+        <a href="#" onclick="toggleSubMenu('paginas')">Páginas</a>
+        <a href="#" onclick="resetBackground()">Resetar Background</a>
+    </div>
 
-        <label>Endereço confirmado?</label>
-        <div class="radio-group">
-            <label><input type="radio" name="endereco" value="Sim"> Sim</label>
-            <label><input type="radio" name="endereco" value="Não"> Não</label>
-        </div>
+    <div class="submenu" id="submenu-personalize">
+        <a href="#">Altere o seu template</a>
+        <input type="text" id="backgroundUrl" placeholder="Cole a URL da imagem" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: none;">
+        <button onclick="applyCustomBackground()" style="width: 100%; margin-top: 10px; padding: 8px; background-color: green; border: none; color: white; border-radius: 5px; cursor: pointer;">aplicar fundo</button>
+        <a href="#" onclick="toggleSubMenu('opcoes')">Voltar ao Menu</a>
+    </div>
 
-        <button type="button" id="copiarBtn" onclick="copyFormData()" disabled>Copiar Dados</button>
-    </form>
-
+    <div class="submenu" id="submenu-paginas">
+        <a href="#" onclick="toggleSubMenu('opcoes')">Voltar ao Menu</a>
+        <a href="index.html">Mapeamento</a>
+    </div>
+</div>
 
 <script>
-    const fields = ["nome", "protocolo", "motivo", "descricao"];
-    const radioGroups = ["emenda", "endereco"];
+function toggleSubMenu(menu) {
+    document.querySelectorAll(".submenu").forEach(sub => {
+        sub.style.display = sub.id === "submenu-" + menu && sub.style.display !== "block" ? "block" : "none";
+    });
+}
 
-    // Salvar campos no SessionStorage
+// ✅ Função copiar dados
+function copyFormData() {
+    const copyButton = document.querySelector("button[onclick='copyFormData()']");
+    if (copyButton.disabled) {
+        alert("Por favor, preencha todos os campos antes de copiar.");
+        return;
+    }
+
+    const campos = [
+        {label: "TEC:", id: "nome"},
+        {label: "CLIENTE:", id: "relato"},
+        {label: "PROBLEMA:", id: "feito"},
+        {label: "TESTES FEITOS:", id: "teste"},
+        {label: "NOTA DO WIFI:", id: "notaWifi"},
+        {label: "OUTROS PROBLEMAS RELATADOS:", id: "caso"},
+        {label: "SUGESTÃO DO CENTRO DE SOLUÇÕES:", id: "Sugestões"},
+        {label: "EMENDA:", id: "emenda"},
+        {label: "CONFIRMADO ENDEREÇO:", id: "endereco"},
+        {label: "PONTO DE REFERENCIA:", id: "REFERENCIA"},
+        {label: "COR/MATERIAL DA CASA:", id: "cor"},
+        {label: "FACHADA DA CASA:", id: "fachada"},
+        {label: "CLIENTE ESTA CIENTES DE POSSIVEIS COBRAÇAS:", id: "ciente"},
+        {label: "INFORMAÇÕES AO AGENDAMENTO:", id: "agendamento"},
+        {label: "PROTOCOLO:", id: "protocolo"}
+    ];
+
+    let texto = "";
+    campos.forEach(campo => {
+        let valor = "";
+        if (campo.id === "emenda" || campo.id === "endereco") {
+            const selecionado = document.querySelector(`input[name='${campo.id}']:checked`);
+            valor = selecionado ? selecionado.value : "";
+        } else {
+            const input = document.getElementById(campo.id);
+            valor = input ? input.value : "";
+        }
+        texto += `${campo.label}\n${valor}\n\n`;
+    });
+
+    navigator.clipboard.writeText(texto.trim())
+        .then(() => alert("Copiado com sucesso!"))
+        .catch(() => alert("Erro ao copiar."));
+}
+
+function clearFormData() {
+    if (confirm("Tem certeza que deseja limpar os campos do formulário?")) {
+        document.querySelectorAll("#myForm input, #myForm textarea").forEach(input => {
+            input.value = "";
+            sessionStorage.removeItem(input.id);
+        });
+        alert("Os campos foram limpos com sucesso!");
+        checkFormValidity();
+    }
+}
+
+const defaultBackground = 'https://img.freepik.com/fotos-gratis/fundo-abstrato-escuro_1048-1920.jpg?semt=ais_hybrid';
+
+function changeBackground(image) {
+    document.body.style.backgroundImage = `url('${image}')`;
+    sessionStorage.setItem("backgroundImage", image);
+}
+
+function resetBackground() {
+    document.body.style.backgroundImage = `url('${defaultBackground}')`;
+    sessionStorage.setItem("backgroundImage", defaultBackground);
+}
+
+function applyCustomBackground() {
+    let imageUrl = document.getElementById("backgroundUrl").value.trim();
+    if (imageUrl) {
+        document.body.style.backgroundImage = `url('${imageUrl}')`;
+        sessionStorage.setItem("backgroundImage", imageUrl);
+    } else {
+        alert("Por favor, insira uma URL válida.");
+    }
+}
+
+function checkFormValidity() {
+    const form = document.getElementById('myForm');
+    const copyButton = document.querySelector("button[onclick='copyFormData()']");
+    const allFilled = [...form.querySelectorAll('input[required], textarea[required]')].every(input => input.value.trim() !== '');
+    const emendaMarcada = document.querySelector("input[name='emenda']:checked");
+    const enderecoMarcado = document.querySelector("input[name='endereco']:checked");
+    copyButton.disabled = !(allFilled && emendaMarcada && enderecoMarcado);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const backgroundImage = sessionStorage.getItem("backgroundImage") || defaultBackground;
+    document.body.style.backgroundImage = `url('${backgroundImage}')`;
+
+    const fields = ["protocolo", "nome", "relato", "feito", "teste", "notaWifi", "Sugestões", "caso", "ciente", "REFERENCIA", "cor", "fachada", "agendamento"];
     fields.forEach(field => {
         const input = document.getElementById(field);
-        input.addEventListener("input", () => {
-            sessionStorage.setItem(field, input.value);
-            checkFormValidity();
-        });
-
-        if (sessionStorage.getItem(field)) {
-            input.value = sessionStorage.getItem(field);
-        }
-    });
-
-    // Salvar radios no SessionStorage
-    radioGroups.forEach(group => {
-        const radios = document.querySelectorAll(`input[name=${group}]`);
-
-        radios.forEach(radio => {
-            radio.addEventListener("change", () => {
-                sessionStorage.setItem(group, radio.value);
+        if (input && sessionStorage.getItem(field)) input.value = sessionStorage.getItem(field);
+        if (input) {
+            input.addEventListener("input", () => {
+                sessionStorage.setItem(field, input.value);
                 checkFormValidity();
             });
+        }
+    });
 
-            if (sessionStorage.getItem(group) === radio.value) {
-                radio.checked = true;
-            }
+    // Monitorar radio buttons
+    ["emenda","endereco"].forEach(name => {
+        document.querySelectorAll(`input[name='${name}']`).forEach(radio => {
+            radio.addEventListener("change", checkFormValidity);
         });
     });
 
-    // Habilitar/desabilitar botão
-    function checkFormValidity() {
-        const allFilled = fields.every(field => document.getElementById(field).value.trim() !== "");
-        const radiosChecked = radioGroups.every(group => sessionStorage.getItem(group) !== null);
-
-        document.getElementById("copiarBtn").disabled = !(allFilled && radiosChecked);
-    }
-
-    // Copiar dados
-    function copyFormData() {
-        if (document.getElementById("copiarBtn").disabled) {
-            alert("Preencha todos os campos antes de copiar!");
-            return;
-        }
-
-        const text = `
-Nome do Cliente: ${document.getElementById("nome").value}
-Protocolo: ${document.getElementById("protocolo").value}
-Motivo do Contato: ${document.getElementById("motivo").value}
-Descrição do Atendimento: ${document.getElementById("descricao").value}
-Cliente ciente de possíveis cobranças: ${sessionStorage.getItem("emenda")}
-Endereço confirmado: ${sessionStorage.getItem("endereco")}
-        `.trim();
-
-        navigator.clipboard.writeText(text);
-        alert("✅ Dados copiados com sucesso!");
-    }
-
     checkFormValidity();
+});
 </script>
-
 </body>
 </html>
