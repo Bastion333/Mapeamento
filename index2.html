@@ -211,14 +211,7 @@ function toggleSubMenu(menu) {
     });
 }
 
-// ✅ Função copiar dados
 function copyFormData() {
-    const copyButton = document.querySelector("button[onclick='copyFormData()']");
-    if (copyButton.disabled) {
-        alert("Por favor, preencha todos os campos antes de copiar.");
-        return;
-    }
-
     const campos = [
         {label: "TEC:", id: "nome"},
         {label: "CLIENTE:", id: "relato"},
@@ -227,8 +220,8 @@ function copyFormData() {
         {label: "NOTA DO WIFI:", id: "notaWifi"},
         {label: "OUTROS PROBLEMAS RELATADOS:", id: "caso"},
         {label: "SUGESTÃO DO CENTRO DE SOLUÇÕES:", id: "Sugestões"},
-        {label: "EMENDA:", id: "emenda"},
-        {label: "CONFIRMADO ENDEREÇO:", id: "endereco"},
+        {label: "EMENDA:", id: "emenda", type: "radio"},
+        {label: "CONFIRMADO ENDEREÇO:", id: "endereco", type: "radio"},
         {label: "PONTO DE REFERENCIA:", id: "REFERENCIA"},
         {label: "COR/MATERIAL DA CASA:", id: "cor"},
         {label: "FACHADA DA CASA:", id: "fachada"},
@@ -238,9 +231,10 @@ function copyFormData() {
     ];
 
     let texto = "";
+
     campos.forEach(campo => {
         let valor = "";
-        if (campo.id === "emenda" || campo.id === "endereco") {
+        if (campo.type === "radio") {
             const selecionado = document.querySelector(`input[name='${campo.id}']:checked`);
             valor = selecionado ? selecionado.value : "";
         } else {
@@ -250,10 +244,15 @@ function copyFormData() {
         texto += `${campo.label}\n${valor}\n\n`;
     });
 
-    navigator.clipboard.writeText(texto.trim())
-        .then(() => alert("Copiado com sucesso!"))
-        .catch(() => alert("Erro ao copiar."));
+    navigator.clipboard.writeText(texto).then(() => {
+        alert("Dados copiados com sucesso!");
+    }).catch(err => {
+        alert("Erro ao copiar os dados.");
+        console.error(err);
+    });
 }
+
+
 
 function clearFormData() {
     if (confirm("Tem certeza que deseja limpar os campos do formulário?")) {
