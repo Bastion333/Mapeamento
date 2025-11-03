@@ -124,20 +124,6 @@
         <label for="Sugestões">SUGESTÃO DO CENTRO DE SOLUÇÕES</label>
         <textarea id="Sugestões" name="Sugestões" rows="4" required></textarea>
     </div>
-    <div class="form-group">
-        <label>Foi feita emenda no drop do cliente?</label>
-        <div>
-            <label style="display: block;">
-                <input type="radio" name="emenda" value="Sim"> Sim
-            </label>
-            <label style="display: block;">
-                <input type="radio" name="emenda" value="Não"> Não
-            </label>
-            <label style="display: block;">
-                <input type="radio" name="emenda" value="Sem relação"> Sem relação com o problema
-            </label>
-        </div>    
-    </div>
 
     <div class="form-group">
         <label for="caso">OUTROS PROBLEMAS RELATADOS</label>
@@ -220,7 +206,6 @@ function copyFormData() {
         {label: "NOTA DO WIFI:", id: "notaWifi"},
         {label: "OUTROS PROBLEMAS RELATADOS:", id: "caso"},
         {label: "SUGESTÃO DO CENTRO DE SOLUÇÕES:", id: "Sugestões"},
-        {label: "EMENDA:", id: "emenda", type: "radio"},
         {label: "CONFIRMADO ENDEREÇO:", id: "endereco", type: "radio"},
         {label: "PONTO DE REFERENCIA:", id: "REFERENCIA"},
         {label: "COR/MATERIAL DA CASA:", id: "cor"},
@@ -251,8 +236,6 @@ function copyFormData() {
         console.error(err);
     });
 }
-
-
 
 function clearFormData() {
     if (confirm("Tem certeza que deseja limpar os campos do formulário?")) {
@@ -291,9 +274,8 @@ function checkFormValidity() {
     const form = document.getElementById('myForm');
     const copyButton = document.querySelector("button[onclick='copyFormData()']");
     const allFilled = [...form.querySelectorAll('input[required], textarea[required]')].every(input => input.value.trim() !== '');
-    const emendaMarcada = document.querySelector("input[name='emenda']:checked");
     const enderecoMarcado = document.querySelector("input[name='endereco']:checked");
-    copyButton.disabled = !(allFilled && emendaMarcada && enderecoMarcado);
+    copyButton.disabled = !(allFilled && enderecoMarcado);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -312,8 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Monitorar radio buttons
-    ["emenda","endereco"].forEach(name => {
+    ["endereco"].forEach(name => {
         document.querySelectorAll(`input[name='${name}']`).forEach(radio => {
             radio.addEventListener("change", checkFormValidity);
         });
